@@ -1,0 +1,4 @@
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.dll
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb

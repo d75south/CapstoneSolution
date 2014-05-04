@@ -1,0 +1,7 @@
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe.config
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.Properties.Resources.resources
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb

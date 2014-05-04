@@ -1,0 +1,7 @@
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\bin\Debug\BILiteReporting.exe.config
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\bin\Debug\BILiteReporting.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\bin\Debug\BILiteReporting.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.Properties.Resources.resources
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.csproj.GenerateResource.Cache
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.pdb
