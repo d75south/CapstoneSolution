@@ -11,6 +11,7 @@ namespace BILiteMain
 {
     class OptionsTree
     {
+        private string testVariable = null;
         private MainForm mainForm = new MainForm();
         #region "Connections Available"        
         public static DataTable GetTablesColumns(String connectionString)
