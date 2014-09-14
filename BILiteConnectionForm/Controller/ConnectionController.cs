@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BILiteDataLayer;
 using System.Data.SqlClient;
 
-namespace BILiteMain.Controller
+namespace BILiteConnectionForm
 {
     class ConnectionController
     {
@@ -32,13 +32,13 @@ namespace BILiteMain.Controller
 
             // sends new conn1 specs into db
             //uses connection established at form initialization
-            Connection con = new Connection();
-            con.SystemDBConnection();
+           
+            Connection.SystemDBConnection();
         }
 
         public bool fireSysDbExceptionMessage()
         {
-            if (Connection.fireSystemDBConnectionException())            
+            if (Connection.fireDBConnectionException())            
                 return true;            
             else
                 return false;

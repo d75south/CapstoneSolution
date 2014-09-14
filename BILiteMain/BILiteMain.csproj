@@ -7,7 +7,7 @@
     <ProjectGuid>{3F436164-B888-4115-A75E-37F9D4F24596}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BILiteMain</RootNamespace>
+    <RootNamespace>BILiteConnectionForm</RootNamespace>
     <AssemblyName>BILiteMain</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BILiteMainBL\NewControl.cs" />
+    <Compile Include="BILiteMainBL\OptionsTree.cs" />
+    <Compile Include="BILiteMainBL\PopulateDataTable.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="MixedCheckBoxesTreeview.cs">
       <SubType>Component</SubType>

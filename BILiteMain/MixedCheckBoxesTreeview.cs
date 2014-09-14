@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BILiteMain
+namespace BILiteConnectionForm
 {
     public class HiddenCheckBoxTreeNode : TreeNode
     {

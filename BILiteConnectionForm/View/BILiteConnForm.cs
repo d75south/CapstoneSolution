@@ -7,13 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BILiteMain.Controller;
 
-namespace BILiteMain
+namespace BILiteConnectionForm
 {
     public partial class BILiteConnForm : Form
-    {
-
+    {               
         public String connName { get; set; }
         public String connLocation { get; set; }
         public String dbName { get; set; }
@@ -53,11 +51,8 @@ namespace BILiteMain
             }
 
             connectionController = new ConnectionController();
-
-            DatabaseDropDown.Enabled = false;           
+            DatabaseDropDown.Enabled = false;                      
         }
-
-
 
         private void SubmitFormToSysDatabase(Object sender, EventArgs e)
         {
@@ -67,7 +62,7 @@ namespace BILiteMain
             }
             else
             {
-
+                //SUBMIT FORM TO DATABASE
             }
         }
 

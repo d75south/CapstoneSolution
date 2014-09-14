@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BILiteConnectionForm;
 
 namespace BILiteMain
 {
@@ -15,41 +16,50 @@ namespace BILiteMain
         private Point previousLocation;
         private Control activeControl;
         private MainController controller;
-        private int tree_x, tree_y;
-        
+        private ToolStripMenuItem adminMenuStripItem;
+
         public MainForm()
         {
             InitializeComponent();
-            
+
             this.Size = new Size(1000, 1000);
-            this.AutoScroll = true;
-            button1.Click += button1_Click;
+            this.AutoScroll = true;     
             this.Load += MainForm_Load;
+            this.Resize += MainForm_Resize;
+            //addMenu1.MenuItems.Add("Add", new EventHandler());
                        
             foreach (Control ctrl in this.Controls)
             {
-                ctrl.MouseClick += ctrl_MouseClick;
-                ctrl.MouseDown += ctrl_MouseDown;
-                ctrl.MouseMove += ctrl_MouseMove;
-                ctrl.MouseUp += ctrl_MouseUp;
+                if (ctrl is ListBox)
+                {
+                    ctrl.MouseClick += ctrl_MouseClick;
+                    ctrl.MouseDown += ctrl_MouseDown;
+                    ctrl.MouseMove += ctrl_MouseMove;
+                    ctrl.MouseUp += ctrl_MouseUp;
+                }
             }
         }
 
+
+        void MainForm_Resize(object sender, EventArgs e)
+        {
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             controller = new MainController();            
-            tree_x = 64;
-            tree_y = 72;
             controller.systemDBConnection();
 
-            if (controller.fireSysDbExceptionMessage())
+            
+            if (controller.fireDbExceptionMessage())
             {
-             MessageBox.Show("There was an error connecting to the system database");
+             MessageBox.Show("There was an error connecting to the database");
              this.Close();
-            }
-        }
+            }           
 
+            OptionsTreeViewLoad();
+
+        }
 
         public void ctrl_MouseClick(object sender, EventArgs e)
         {
@@ -78,25 +88,19 @@ namespace BILiteMain
             Cursor = Cursors.Default;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {        
-            Control treeview = controller.CreateTreeView();           
-            treeview.Location = new Point(tree_x, tree_y);
-            tree_y = tree_y + 125;
-
-            panel2.Controls.Add(treeview);
-
-            treeview.MouseClick += ctrl_MouseClick;
-            treeview.MouseDown += ctrl_MouseDown;
-            treeview.MouseMove += ctrl_MouseMove;
-            treeview.MouseUp += ctrl_MouseUp;
-  
-        }
-
-        private void createNewToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void createNewToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
             var connForm = new BILiteConnForm();
+            connForm.Focus();
             connForm.Show();
         }
+
+        private void OptionsTreeViewLoad()
+        {           
+            TreeView t1 = controller.GetOptionsTree();
+            panel3.Controls.Add(t1);
+            t1.Dock = DockStyle.Fill;
+        }
+
     }
 }

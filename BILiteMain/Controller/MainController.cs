@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using BILiteDataLayer;
+using System.Data;
 
 namespace BILiteMain
 {
     public class MainController
     {
         private MainForm form = new MainForm();
-        private List<Control> form1ControlList;
-        private NewControl newControl = new NewControl();        
+        private List<Control> form1ControlList;       
 
         public MainController()
         {
@@ -29,32 +29,56 @@ namespace BILiteMain
             }
         }
 
-        //public Control CreateListBox()
-        //{
-        //    Control lb = newControl.NewListBox();
-        //    return lb;
-        //}
-
-        public Control CreateTreeView()
-        {
-            Control tr = newControl.NewTreeView();
-            return tr;
-        }
-
         public void systemDBConnection()
-        {
-            Connection con = new Connection();
-            con.SystemDBConnection();
+        {           
+            Connection.SystemDBConnection();
         }
 
-        public bool fireSysDbExceptionMessage()
+        public bool fireDbExceptionMessage()
         {
-            if (Connection.fireSystemDBConnectionException())
+            if (Connection.fireDBConnectionException())
             {
                 return true;
             }
             else
                 return false;
+        }
+
+        public TreeView GetOptionsTree()
+        {
+            TreeView treeView1 = new TreeView();
+            
+            
+            foreach (DataRow dataRow in OptionsTree.GetConnectionsData("SELECT * FROM Connections").Rows)
+            {
+                HashSet<String> hs = new HashSet<String>();
+                TreeNode connection = new TreeNode();
+                String Connection_String = dataRow["Connection_String"].ToString().Trim();
+                connection = treeView1.Nodes.Add(dataRow["Connection_Name"].ToString().Trim());
+                foreach (DataRow dr in OptionsTree.GetTablesColumns(Connection_String).Rows)
+                {
+                    hs.Add(dr[0].ToString().Trim());
+                }
+
+                foreach (String str in hs)
+                {
+                    TreeNode table = new TreeNode();
+                    table = connection.Nodes.Add(str.Trim());
+                    foreach (DataRow dr in OptionsTree.GetTablesColumns(Connection_String).Rows)
+                    {
+                        if (table.Text.ToString().Trim() == dr[0].ToString().Trim())
+                        {
+                            table.Nodes.Add(dr[1].ToString().Trim());
+                        }
+                    }
+                }
+            }
+            return treeView1;
+        }
+
+        public String getConnectionError()
+        {
+            return Connection.exceptionString.ToString();
         }
     }
 }

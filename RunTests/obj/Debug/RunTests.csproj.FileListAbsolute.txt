@@ -1,0 +1,12 @@
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\RunTests.exe.config
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\RunTests.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\RunTests.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\BILiteMain.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\BILiteDataLayer.dll
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\BILiteConnectionForm.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\BILiteMain.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\BILiteDataLayer.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\bin\Debug\BILiteConnectionForm.pdb
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\obj\Debug\RunTests.csprojResolveAssemblyReference.cache
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\obj\Debug\RunTests.exe
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\RunTests\obj\Debug\RunTests.pdb

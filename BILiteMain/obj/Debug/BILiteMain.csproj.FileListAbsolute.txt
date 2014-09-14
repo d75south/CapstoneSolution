@@ -3,11 +3,28 @@ C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteMain.pdb
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteConnectionForm.exe
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteDataLayer.dll
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\System.Data.SqlServerCe.dll
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteConnectionForm.pdb
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteDataLayer.pdb
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.csprojResolveAssemblyReference.cache
-C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.Properties.Resources.resources
+C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteConnectionForm.Properties.Resources.resources
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.MainForm.resources
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.csproj.GenerateResource.Cache
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.exe
 C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.pdb
+D:\CapstoneSolution\BILiteMain\bin\Debug\BILiteMain.exe.config
+D:\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.exe
+D:\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteMain.exe.config
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteMain.exe
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteMain.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteConnectionForm.exe
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteDataLayer.dll
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteConnectionForm.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteDataLayer.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteConnectionForm.Properties.Resources.resources
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.MainForm.resources
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.csproj.GenerateResource.Cache
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.exe
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.pdb
