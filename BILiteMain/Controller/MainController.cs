@@ -13,7 +13,8 @@ namespace BILiteMain
     public class MainController
     {
         private MainForm form = new MainForm();
-        private List<Control> form1ControlList;       
+        private List<Control> form1ControlList;
+        private DataTable connectionInfo = new DataTable();
 
         public MainController()
         {
@@ -47,9 +48,10 @@ namespace BILiteMain
         public TreeView GetOptionsTree()
         {
             TreeView treeView1 = new TreeView();
-            
-            
-            foreach (DataRow dataRow in OptionsTree.GetConnectionsData("SELECT * FROM Connections").Rows)
+
+            connectionInfo = OptionsTree.GetConnectionsData("SELECT * FROM Connections");
+
+            foreach (DataRow dataRow in connectionInfo.Rows)
             {
                 HashSet<String> hs = new HashSet<String>();
                 TreeNode connection = new TreeNode();
@@ -74,6 +76,27 @@ namespace BILiteMain
                 }
             }
             return treeView1;
+        }
+
+        public List<String> GetConnectionNameList()
+        {
+           List<String> resultStringArray = new List<String>();
+
+            foreach (DataRow dataRow in connectionInfo.Rows)
+            {
+                resultStringArray.Add(dataRow["Connection_Name"].ToString());
+            }
+
+            return resultStringArray;
+        }
+
+        public String GetActualDBName(String ConnectionName)
+        {
+            DataRow connName = connectionInfo.Select("Connection_Name = " +"'"+ 
+                ConnectionName.Trim() + "'").Single();
+            String[] connNameString = connName["Connection_String"].ToString().Split(';');
+            String connNameResult = connNameString[1].Replace("Database=", "").Trim();
+            return connNameResult;
         }
 
         public String getConnectionError()

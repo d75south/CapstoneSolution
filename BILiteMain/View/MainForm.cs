@@ -16,7 +16,8 @@ namespace BILiteMain
         private Point previousLocation;
         private Control activeControl;
         private MainController controller;
-        private ToolStripMenuItem adminMenuStripItem;
+        private TreeView t1;
+        private ContextMenuStrip OptionTreeContext;
 
         public MainForm()
         {
@@ -38,6 +39,9 @@ namespace BILiteMain
                     ctrl.MouseUp += ctrl_MouseUp;
                 }
             }
+
+            t1 = new TreeView();
+
         }
 
 
@@ -58,6 +62,12 @@ namespace BILiteMain
             }           
 
             OptionsTreeViewLoad();
+
+            OptionTreeContext = new ContextMenuStrip();
+            OptionTreeContext.Items.Add("Add");
+            t1.ContextMenuStrip = OptionTreeContext;
+            //OptionTreeContext.Opening += ContextMenu_Opening;
+            t1.MouseUp += On_TreeViewMouseUp;
 
         }
 
@@ -96,10 +106,48 @@ namespace BILiteMain
         }
 
         private void OptionsTreeViewLoad()
-        {           
-            TreeView t1 = controller.GetOptionsTree();
+        {
+            t1 = controller.GetOptionsTree();
             panel3.Controls.Add(t1);
             t1.Dock = DockStyle.Fill;
+
+        }
+
+        private void On_TreeViewMouseUp(object sender, MouseEventArgs e)
+        {
+
+            //move all of this into a ContextMenuOpening Event
+            /*move part dealing with treeview.SelectedNode value not null then into a seperate method
+              amounts to basically, everything below the if(e.button == MouseButtons.Right) block
+             */
+            //check the contextMenu.for the value in the list, if it's not there then items.add("add")
+            //else items.add("add");
+            /*context menu event creates the table and adds fully qualified table name to a tag of the 
+              table object it creates. This wil be used by the From clause to establish the Select 
+              statement. 
+             *Still need a class for creating a list of table objects. Takes the table name as an
+              argument and uses this to return a datatable with a list of the colums so it can populate
+              the list box that will be the table. 
+             *The table will have a a label above it positioned by the anchor of the listbox. 
+             *This may have to invalidate as the listbox(table) moves.
+             */
+
+            TreeView treeview = (TreeView)sender;
+
+            if (e.Button == MouseButtons.Right)
+            {
+                // Select the clicked node
+               treeview.SelectedNode = treeview.GetNodeAt(e.X, e.Y);
+          
+                if (treeview.SelectedNode != null)
+                {
+                    if (controller.GetConnectionNameList().IndexOf(treeview.SelectedNode.Parent.ToString().Replace("TreeNode:","").Trim()) == -1)
+                    {
+                        MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ","")) +"]" +
+                                    treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ","."));
+                    }
+                }
+            }
         }
 
     }
