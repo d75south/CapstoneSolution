@@ -63,12 +63,29 @@ namespace BILiteMain
 
             OptionsTreeViewLoad();
 
-            OptionTreeContext = new ContextMenuStrip();
-            OptionTreeContext.Items.Add("Add");
-            t1.ContextMenuStrip = OptionTreeContext;
-            //OptionTreeContext.Opening += ContextMenu_Opening;
             t1.MouseUp += On_TreeViewMouseUp;
+            OptionTreeContext.MouseClick+= OptionTreeContext_MouseClick;
 
+        }
+
+        private void OptionTreeContext_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (t1.SelectedNode != null)
+                {
+
+                    if (t1.SelectedNode.Parent.Parent == null)
+                    {
+                        MessageBox.Show("[" + controller.GetActualDBName(t1.SelectedNode.Parent.ToString().Replace("TreeNode: ", "")) + "]");
+                    }
+
+                    else if (controller.GetConnectionNameList().IndexOf(t1.SelectedNode.Parent.ToString().Replace("TreeNode:", "").Trim()) == -1)
+                    {
+                        MessageBox.Show("[" + controller.GetActualDBName(t1.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]");
+                    }
+                }
+            }
         }
 
         public void ctrl_MouseClick(object sender, EventArgs e)
@@ -130,6 +147,8 @@ namespace BILiteMain
               the list box that will be the table. 
              *The table will have a a label above it positioned by the anchor of the listbox. 
              *This may have to invalidate as the listbox(table) moves.
+             *MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]" +
+                              treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ", "."));
              */
 
             TreeView treeview = (TreeView)sender;
@@ -138,17 +157,31 @@ namespace BILiteMain
             {
                 // Select the clicked node
                treeview.SelectedNode = treeview.GetNodeAt(e.X, e.Y);
-          
-                if (treeview.SelectedNode != null)
-                {
-                    if (controller.GetConnectionNameList().IndexOf(treeview.SelectedNode.Parent.ToString().Replace("TreeNode:","").Trim()) == -1)
-                    {
-                        MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ","")) +"]" +
-                                    treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ","."));
-                    }
-                }
+
+               if (treeview.SelectedNode != null)
+               {
+
+                   if (treeview.SelectedNode.Parent.Parent == null)
+                   {
+                       OptionTreeContext = new ContextMenuStrip();
+                       t1.ContextMenuStrip = OptionTreeContext;
+                       OptionTreeContext.Items.Add("Add");
+                       OptionTreeContext.Show(this, new Point(e.X, e.Y));
+
+                      // MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ", "")) + "]");
+                   }
+
+                   else  if (controller.GetConnectionNameList().IndexOf(treeview.SelectedNode.Parent.ToString().Replace("TreeNode:", "").Trim()) == -1)
+                   {
+                       OptionTreeContext = new ContextMenuStrip();
+                       t1.ContextMenuStrip = OptionTreeContext;
+                       OptionTreeContext.Items.Add("Add");
+                       OptionTreeContext.Show(this, new Point(e.X, e.Y));
+
+                      // MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]");
+                   }
+               }
             }
         }
-
-    }
+    }     
 }
