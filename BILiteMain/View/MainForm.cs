@@ -18,6 +18,10 @@ namespace BILiteMain
         private MainController controller;
         private TreeView t1;
         private ContextMenuStrip OptionTreeContext;
+        private String SelectedNode { get; set; }
+        private bool IsInList { get; set; }
+        private bool IsSelectedNodeParentParentNode { get; set; }
+        private String TableReference { get; set; }
 
         public MainForm()
         {
@@ -31,7 +35,7 @@ namespace BILiteMain
                        
             foreach (Control ctrl in this.Controls)
             {
-                if (ctrl is ListBox)
+                if (ctrl is CheckedListBox)
                 {
                     ctrl.MouseClick += ctrl_MouseClick;
                     ctrl.MouseDown += ctrl_MouseDown;
@@ -64,28 +68,22 @@ namespace BILiteMain
             OptionsTreeViewLoad();
 
             t1.MouseUp += On_TreeViewMouseUp;
-            OptionTreeContext.MouseClick+= OptionTreeContext_MouseClick;
-
+           
         }
 
-        private void OptionTreeContext_MouseClick(object sender, MouseEventArgs e)
+        private void OptionTreeContext_MouseClick(object sender, EventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            var txt = sender as MenuItem;
+            CheckedListBox chListbox = new CheckedListBox();
+            chListbox = controller.GetTableObject(TableReference);
+
+            if (SelectedNode != null)
             {
-                if (t1.SelectedNode != null)
-                {
+                controller.TableList.Add(TableReference);
 
-                    if (t1.SelectedNode.Parent.Parent == null)
-                    {
-                        MessageBox.Show("[" + controller.GetActualDBName(t1.SelectedNode.Parent.ToString().Replace("TreeNode: ", "")) + "]");
-                    }
-
-                    else if (controller.GetConnectionNameList().IndexOf(t1.SelectedNode.Parent.ToString().Replace("TreeNode:", "").Trim()) == -1)
-                    {
-                        MessageBox.Show("[" + controller.GetActualDBName(t1.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]");
-                    }
-                }
+                panel4.Controls.Add(chListbox);
             }
+            SelectedNode = null;
         }
 
         public void ctrl_MouseClick(object sender, EventArgs e)
@@ -132,53 +130,36 @@ namespace BILiteMain
 
         private void On_TreeViewMouseUp(object sender, MouseEventArgs e)
         {
-
-            //move all of this into a ContextMenuOpening Event
-            /*move part dealing with treeview.SelectedNode value not null then into a seperate method
-              amounts to basically, everything below the if(e.button == MouseButtons.Right) block
-             */
-            //check the contextMenu.for the value in the list, if it's not there then items.add("add")
-            //else items.add("add");
-            /*context menu event creates the table and adds fully qualified table name to a tag of the 
-              table object it creates. This wil be used by the From clause to establish the Select 
-              statement. 
-             *Still need a class for creating a list of table objects. Takes the table name as an
-              argument and uses this to return a datatable with a list of the colums so it can populate
-              the list box that will be the table. 
-             *The table will have a a label above it positioned by the anchor of the listbox. 
-             *This may have to invalidate as the listbox(table) moves.
-             *MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]" +
-                              treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ", "."));
-             */
-
             TreeView treeview = (TreeView)sender;
 
             if (e.Button == MouseButtons.Right)
             {
                 // Select the clicked node
-               treeview.SelectedNode = treeview.GetNodeAt(e.X, e.Y);
+                treeview.SelectedNode = treeview.GetNodeAt(e.X, e.Y);
+                SelectedNode = treeview.SelectedNode.ToString();
 
-               if (treeview.SelectedNode != null)
+                if (treeview.SelectedNode != null)
                {
+                   OptionTreeContext = new ContextMenuStrip();
+                   t1.ContextMenuStrip = OptionTreeContext;
+                   OptionTreeContext.Items.Add("Add");
+                   OptionTreeContext.MouseClick += OptionTreeContext_MouseClick;
 
-                   if (treeview.SelectedNode.Parent.Parent == null)
+                    IsSelectedNodeParentParentNode = treeview.SelectedNode.Parent.Parent == null;
+                    IsInList = controller.GetConnectionNameList().IndexOf(treeview.SelectedNode.Parent.ToString().Replace("TreeNode:", "").Trim()) == -1;
+                    if (IsSelectedNodeParentParentNode)
                    {
-                       OptionTreeContext = new ContextMenuStrip();
-                       t1.ContextMenuStrip = OptionTreeContext;
-                       OptionTreeContext.Items.Add("Add");
+
                        OptionTreeContext.Show(this, new Point(e.X, e.Y));
 
-                      // MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ", "")) + "]");
+                        TableReference = "[" + controller.GetActualDBName(treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ", "")) + "]."+treeview.SelectedNode.ToString().Replace("TreeNode: ", "");
                    }
 
-                   else  if (controller.GetConnectionNameList().IndexOf(treeview.SelectedNode.Parent.ToString().Replace("TreeNode:", "").Trim()) == -1)
+                   else  if (IsInList)
                    {
-                       OptionTreeContext = new ContextMenuStrip();
-                       t1.ContextMenuStrip = OptionTreeContext;
-                       OptionTreeContext.Items.Add("Add");
                        OptionTreeContext.Show(this, new Point(e.X, e.Y));
 
-                      // MessageBox.Show("[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]");
+                       TableReference = "[" + controller.GetActualDBName(treeview.SelectedNode.Parent.Parent.ToString().Replace("TreeNode: ", "")) + "]." + treeview.SelectedNode.Parent.ToString().Replace("TreeNode: ", "");
                    }
                }
             }

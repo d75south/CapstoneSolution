@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using BILiteDataLayer;
 using System.Data;
+using BILiteReporting;
 
 namespace BILiteMain
 {
@@ -15,6 +16,8 @@ namespace BILiteMain
         private MainForm form = new MainForm();
         private List<Control> form1ControlList;
         private DataTable connectionInfo = new DataTable();
+        private StringBuilder strBuilder = new StringBuilder();
+        public List<String> TableList = new List<string>();
 
         public MainController()
         {
@@ -97,6 +100,23 @@ namespace BILiteMain
             String[] connNameString = connName["Connection_String"].ToString().Split(';');
             String connNameResult = connNameString[1].Replace("Database=", "").Trim();
             return connNameResult;
+        }
+
+        public StringBuilder GetTableList()
+        {
+            strBuilder.Clear();
+            foreach (String str in TableList)
+            {
+                strBuilder.Append(str);
+                strBuilder.Append(";");
+            }
+
+            return strBuilder;
+        }
+
+        public CheckedListBox GetTableObject(String tableName)
+        {
+            return TableObjects.CreateTableObject(tableName);
         }
 
         public String getConnectionError()

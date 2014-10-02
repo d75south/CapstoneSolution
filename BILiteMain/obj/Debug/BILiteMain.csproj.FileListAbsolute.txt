@@ -28,3 +28,5 @@ D:\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.pdb
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.csproj.GenerateResource.Cache
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.exe
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\obj\Debug\BILiteMain.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteReporting.exe
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteMain\bin\Debug\BILiteReporting.pdb

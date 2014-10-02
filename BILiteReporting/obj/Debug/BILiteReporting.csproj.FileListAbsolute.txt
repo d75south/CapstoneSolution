@@ -13,3 +13,6 @@ C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteRepo
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.csproj.GenerateResource.Cache
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.exe
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\bin\Debug\BILiteDataLayer.dll
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteReporting\bin\Debug\BILiteDataLayer.pdb

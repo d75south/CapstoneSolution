@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BILiteMainBL\OptionsTree.cs" />
-    <Compile Include="BILiteMainBL\PopulateDataTable.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="MixedCheckBoxesTreeview.cs">
       <SubType>Component</SubType>
@@ -94,6 +93,10 @@
     <ProjectReference Include="..\BILiteDataLayer\BILiteDataLayer.csproj">
       <Project>{3c5a50ff-bb8a-4e06-af80-39603c7143fa}</Project>
       <Name>BILiteDataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BILiteReporting\BILiteReporting.csproj">
+      <Project>{78c6893a-b329-45b4-a712-3e02453858a0}</Project>
+      <Name>BILiteReporting</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlServerCe;
+using System.Data;
 
 namespace BILiteDataLayer
 {
@@ -38,6 +38,17 @@ namespace BILiteDataLayer
             }
             
         }
+
+        public static DataTable PopulateTable(String commandString, String connectionString)
+        {
+            DataTable dt = new DataTable();
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand(commandString, con);
+            SqlDataAdapter sqda = new SqlDataAdapter(command);
+            sqda.Fill(dt);
+            return dt;
+        }
+
 
         public static Boolean fireDBConnectionException()
         {

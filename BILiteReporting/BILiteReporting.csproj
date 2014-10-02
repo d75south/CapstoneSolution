@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BIReportingBL\TableObjects.cs" />
+    <Compile Include="Controller\ReportingController.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,9 +77,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BIReportingBL\" />
-    <Folder Include="Controller\" />
     <Folder Include="View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BILiteDataLayer\BILiteDataLayer.csproj">
+      <Project>{3c5a50ff-bb8a-4e06-af80-39603c7143fa}</Project>
+      <Name>BILiteDataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

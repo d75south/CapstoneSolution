@@ -30,12 +30,12 @@ namespace BILiteMain
                                      FROM INFORMATION_SCHEMA.COLUMNS 
                                      ORDER BY TABLE_SCHEMA";
 
-            return PopulateDataTable.PopulateTable(commandString, connectionString);
+            return Connection.PopulateTable(commandString, connectionString);
         }
 
         public static DataTable GetConnectionsData(String sqlCommandString)
         {            
-            return PopulateDataTable.PopulateTable(sqlCommandString, Connection.SystemDBConnectionString);
+            return Connection.PopulateTable(sqlCommandString, Connection.SystemDBConnectionString);
         }
         #endregion
 
