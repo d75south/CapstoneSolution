@@ -7,12 +7,15 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
 using BILiteDataLayer;
+using System.Drawing;
 
 namespace BILiteReporting
 {
-    public class TableObjects
+    public  class TableObjects
     {
-        public static CheckedListBox CreateTableObject(String tableName)
+        private static Dictionary<CheckedListBox, Point> tableObjectsDict = new Dictionary<CheckedListBox,Point>();
+
+        private static CheckedListBox CreateTableObject(String tableName)
         {
             CheckedListBox checkedListBox = new CheckedListBox();
             DataTable table = new DataTable();
@@ -28,6 +31,23 @@ namespace BILiteReporting
             }
 
             return checkedListBox;
+        }
+
+        /// <summary>
+        /// Creates a table object based on the name passed in and combines the objectName with the location of
+        /// the object. This allows for calling mouse move based on the active control being the name of the table
+        /// object and using the stored location as the previous location for the offset on mouse move.
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="tableObjectLocation"></param>
+        public static void CreateTableDictionaryObject(String tableName, Point tableObjectLocation)
+        {
+            tableObjectsDict.Add(CreateTableObject(tableName), tableObjectLocation);
+        }
+
+        public static Dictionary<CheckedListBox, Point> GetTableObjectsList()
+        {
+            return tableObjectsDict;
         }
     }
 }

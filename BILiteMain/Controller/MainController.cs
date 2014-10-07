@@ -116,6 +116,7 @@ namespace BILiteMain
 
         public CheckedListBox GetTableObject(String tableName)
         {
+            //because this has been set to private
             return TableObjects.CreateTableObject(tableName);
         }
 

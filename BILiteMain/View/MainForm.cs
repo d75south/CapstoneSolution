@@ -31,19 +31,7 @@ namespace BILiteMain
             this.AutoScroll = true;     
             this.Load += MainForm_Load;
             this.Resize += MainForm_Resize;
-            //addMenu1.MenuItems.Add("Add", new EventHandler());
                        
-            foreach (Control ctrl in this.Controls)
-            {
-                if (ctrl is CheckedListBox)
-                {
-                    ctrl.MouseClick += ctrl_MouseClick;
-                    ctrl.MouseDown += ctrl_MouseDown;
-                    ctrl.MouseMove += ctrl_MouseMove;
-                    ctrl.MouseUp += ctrl_MouseUp;
-                }
-            }
-
             t1 = new TreeView();
 
         }
@@ -84,27 +72,53 @@ namespace BILiteMain
                 panel4.Controls.Add(chListbox);
             }
             SelectedNode = null;
+
+            foreach (Control ctrl in panel4.Controls)
+            {
+                if (ctrl is CheckedListBox)
+                {
+                  //  ctrl.MouseClick += ctrl_MouseClick;
+                    ctrl.MouseDown += ctrl_MouseDown;
+                    ctrl.MouseMove += ctrl_MouseMove;
+                    ctrl.MouseUp += ctrl_MouseUp;
+                }
+            }
         }
 
-        public void ctrl_MouseClick(object sender, EventArgs e)
-        {
-            Control control = (Control)sender;
-        }
+        //public void ctrl_MouseClick(object sender, EventArgs e)
+        //{
+        //    Control control = (Control)sender;
+        //}
 
         public void ctrl_MouseDown(object sender, MouseEventArgs e)
         {
-            activeControl = (Control)sender;
-            previousLocation = e.Location;
             Cursor = Cursors.Hand;
+            activeControl = sender as Control;
+            if (activeControl is CheckedListBox)
+            {
+                previousLocation = activeControl.Location;
+            }
+            else if (activeControl is Panel)
+            {
+                return;
+            }
+            else
+            {
+                previousLocation = activeControl.Parent.Location;
+            }
+            
         }
 
         public void ctrl_MouseMove(object sender, MouseEventArgs e)
         {
+           
             if (activeControl == null || activeControl != sender)
                 return;
             var location = activeControl.Location;
+            
             location.Offset(e.Location.X - previousLocation.X, e.Location.Y - previousLocation.Y);
             activeControl.Location = location;
+            
         }
 
         public void ctrl_MouseUp(object sender, MouseEventArgs e)
