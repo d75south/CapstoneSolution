@@ -18,6 +18,7 @@ namespace BILiteMain
         private DataTable connectionInfo = new DataTable();
         private StringBuilder strBuilder = new StringBuilder();
         public List<String> TableList = new List<string>();
+        private TableObjects tableObject = new TableObjects();
 
         public MainController()
         {
@@ -116,13 +117,28 @@ namespace BILiteMain
 
         public CheckedListBox GetTableObject(String tableName)
         {
-            //because this has been set to private
+            
             return TableObjects.CreateTableObject(tableName);
+        }
+
+        public Point GetTableObjectLocation(String tableName)
+        {
+            return TableObjects.GetTableObjectList()[tableName];
         }
 
         public String getConnectionError()
         {
             return Connection.exceptionString.ToString();
+        }
+
+        public String GetActualTableName(String tableName)
+        {
+            return TableObjects.GetActualTableName(tableName);
+        }
+
+        public String UpdateSelectStatement(String stringToAppend)
+        {
+            return SelectClause.SelectStatementAssembler(stringToAppend: stringToAppend);
         }
     }
 }

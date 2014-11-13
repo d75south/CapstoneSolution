@@ -20,4 +20,3 @@ C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConn
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csproj.GenerateResource.Cache
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.exe
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.pdb
-\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csprojResolveAssemblyReference.cache

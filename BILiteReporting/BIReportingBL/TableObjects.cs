@@ -13,9 +13,19 @@ namespace BILiteReporting
 {
     public  class TableObjects
     {
-        private static Dictionary<CheckedListBox, Point> tableObjectsDict = new Dictionary<CheckedListBox,Point>();
 
-        private static CheckedListBox CreateTableObject(String tableName)
+        private static Dictionary<String, Point> tableObjects = new Dictionary<String, Point>();
+        private static Dictionary<Point, Point> tableLocations = new Dictionary<Point, Point>();
+        public string TableName { get; set; }
+        //private static Point TableLocation { get; set; }
+        //private static Point AnchorLocation { get; set; }
+        private static int tableXLocation = 0;
+        private static int tableYLocation = 0;
+        private static int tableNameAddition = 0;
+        private static bool firstTableFlag = true;
+
+
+        public static CheckedListBox CreateTableObject(String tableName)
         {
             CheckedListBox checkedListBox = new CheckedListBox();
             DataTable table = new DataTable();
@@ -30,24 +40,77 @@ namespace BILiteReporting
                 checkedListBox.Items.Add(dr["Column_Name"].ToString());
             }
 
+            if (tableXLocation > 400)
+            {
+                tableXLocation = 10;
+                Point lastTableLocation = tableObjects.Values.Last();
+                tableYLocation = lastTableLocation.Y + 135;
+            }
+            else
+            {
+                if (firstTableFlag)
+                {
+                    tableXLocation = tableXLocation + 10;
+                }
+                else
+                {
+                    tableXLocation = tableXLocation + 200;
+                }
+            }
+
+            if (tableObjects.ContainsKey(actualTableName))
+            {
+                tableNameAddition = tableNameAddition + 1;
+                Point tempPoint = new Point(tableXLocation, tableYLocation);
+                StoreTableOject(actualTableName + tableNameAddition.ToString(), tempPoint);
+            }
+            else
+            {
+                Point tempPoint = new Point(tableXLocation, tableYLocation);
+                StoreTableOject(actualTableName, tempPoint);
+            }
+
+            firstTableFlag = false;
             return checkedListBox;
         }
 
-        /// <summary>
-        /// Creates a table object based on the name passed in and combines the objectName with the location of
-        /// the object. This allows for calling mouse move based on the active control being the name of the table
-        /// object and using the stored location as the previous location for the offset on mouse move.
-        /// </summary>
-        /// <param name="tableName"></param>
-        /// <param name="tableObjectLocation"></param>
-        public static void CreateTableDictionaryObject(String tableName, Point tableObjectLocation)
+        public static String GetActualTableName(String tableName)
         {
-            tableObjectsDict.Add(CreateTableObject(tableName), tableObjectLocation);
+            String[] tableReference = tableName.Split('.');
+            String actualTableName = tableReference[2];
+            return actualTableName;
         }
 
-        public static Dictionary<CheckedListBox, Point> GetTableObjectsList()
+        private static void StoreTableOject(String tableName, Point tableObjectLocation)
         {
-            return tableObjectsDict;
+            tableObjects.Add(tableName, tableObjectLocation);
+        }
+
+        public static Dictionary<String, Point> GetTableObjectList()
+        {
+            return tableObjects;
+        }
+
+        /*Using the column data type determine whether you can aggregate the column or not*/
+        public static String GetColumnDataType(String tableColumnName)
+        {
+            DataTable table = new DataTable();
+            String[] tableReference = tableColumnName.Split('.');
+            String serverName = tableReference[0];
+            String actualTableName = tableReference[2];
+            String actualColumnName = tableReference[3];
+            table = Connection.PopulateTable(@"Use " + serverName + @" Select Data_Type 
+                                               From Information_Schema.Columns Where Table_Name =" + "'" +
+                                               actualTableName + "'" + "and Column_Name = "+ "'" + actualColumnName + "'"
+                                               , @"Server=localhost;Trusted_Connection=True;");
+
+            String result = "";
+            foreach (DataRow dr in table.Rows)
+            {
+                result = dr["Data_Type"].ToString();
+            }
+
+            return result;
         }
     }
 }
