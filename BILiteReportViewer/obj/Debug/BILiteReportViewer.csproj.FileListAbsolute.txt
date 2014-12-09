@@ -1,0 +1,9 @@
+E:\CapstoneSolution\BILiteReportViewer\bin\Debug\BILiteReportViewer.exe.config
+E:\CapstoneSolution\BILiteReportViewer\bin\Debug\BILiteReportViewer.exe
+E:\CapstoneSolution\BILiteReportViewer\bin\Debug\BILiteReportViewer.pdb
+E:\CapstoneSolution\BILiteReportViewer\obj\Debug\BILiteReportViewer.csprojResolveAssemblyReference.cache
+E:\CapstoneSolution\BILiteReportViewer\obj\Debug\BILiteReportViewer.Form1.resources
+E:\CapstoneSolution\BILiteReportViewer\obj\Debug\BILiteReportViewer.Properties.Resources.resources
+E:\CapstoneSolution\BILiteReportViewer\obj\Debug\BILiteReportViewer.csproj.GenerateResource.Cache
+E:\CapstoneSolution\BILiteReportViewer\obj\Debug\BILiteReportViewer.exe
+E:\CapstoneSolution\BILiteReportViewer\obj\Debug\BILiteReportViewer.pdb

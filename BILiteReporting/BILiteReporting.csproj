@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BIReportingBL\CheckedListBoxObject.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="BIReportingBL\SelectClause.cs" />
     <Compile Include="BIReportingBL\TableObjects.cs" />
     <Compile Include="Controller\ReportingController.cs" />

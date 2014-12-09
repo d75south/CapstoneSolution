@@ -13,3 +13,25 @@ C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDash
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb
+F:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe.config
+F:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe
+F:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.pdb
+F:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csprojResolveAssemblyReference.cache
+F:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.Properties.Resources.resources
+F:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
+F:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
+F:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb
+E:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe.config
+E:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe
+E:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.pdb
+E:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.Properties.Resources.resources
+E:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
+E:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
+E:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb
+X:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe.config
+X:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe
+X:\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.pdb
+X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.Properties.Resources.resources
+X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
+X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
+X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb

@@ -20,3 +20,37 @@ C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConn
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csproj.GenerateResource.Cache
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.exe
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.pdb
+\\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csprojResolveAssemblyReference.cache
+F:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.exe.config
+F:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.exe
+F:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.pdb
+F:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteDataLayer.dll
+F:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteDataLayer.pdb
+F:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csprojResolveAssemblyReference.cache
+F:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.BILiteConnForm.resources
+F:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.Properties.Resources.resources
+F:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csproj.GenerateResource.Cache
+F:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.exe
+F:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.pdb
+E:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.exe.config
+E:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.exe
+E:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.pdb
+E:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteDataLayer.dll
+E:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteDataLayer.pdb
+E:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.BILiteConnForm.resources
+E:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.Properties.Resources.resources
+E:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csproj.GenerateResource.Cache
+E:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.exe
+E:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.pdb
+E:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csprojResolveAssemblyReference.cache
+X:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.exe.config
+X:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.exe
+X:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteConnectionForm.pdb
+X:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteDataLayer.dll
+X:\CapstoneSolution\BILiteConnectionForm\bin\Debug\BILiteDataLayer.pdb
+X:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csprojResolveAssemblyReference.cache
+X:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.BILiteConnForm.resources
+X:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.Properties.Resources.resources
+X:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.csproj.GenerateResource.Cache
+X:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.exe
+X:\CapstoneSolution\BILiteConnectionForm\obj\Debug\BILiteConnectionForm.pdb

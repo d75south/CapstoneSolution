@@ -9,3 +9,17 @@ C:\Users\Derek\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteData
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb
 \\psf\Home\Documents\Visual Studio 2012\Projects\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.csprojResolveAssemblyReference.cache
+F:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.dll
+F:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.pdb
+F:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.csprojResolveAssemblyReference.cache
+F:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
+F:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb
+E:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.dll
+E:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.pdb
+E:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
+E:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb
+E:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.csprojResolveAssemblyReference.cache
+X:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.dll
+X:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.pdb
+X:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
+X:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb

@@ -94,12 +94,14 @@ namespace BILiteMain
             return resultStringArray;
         }
 
-        public String GetActualDBName(String ConnectionName)
+        public String GetActualDBNameFromTableReference(String ConnectionName)
         {
+
             DataRow connName = connectionInfo.Select("Connection_Name = " +"'"+ 
                 ConnectionName.Trim() + "'").Single();
             String[] connNameString = connName["Connection_String"].ToString().Split(';');
             String connNameResult = connNameString[1].Replace("Database=", "").Trim();
+
             return connNameResult;
         }
 
@@ -115,9 +117,8 @@ namespace BILiteMain
             return strBuilder;
         }
 
-        public CheckedListBox GetTableObject(String tableName)
+        public MyCheckedListBox GetTableObject(String tableName)
         {
-            
             return TableObjects.CreateTableObject(tableName);
         }
 
@@ -140,5 +141,16 @@ namespace BILiteMain
         {
             return SelectClause.SelectStatementAssembler(stringToAppend: stringToAppend);
         }
+
+        public String GetColumnDataType(String tableName)
+        {
+            return TableObjects.GetColumnDataType(tableName);
+        }
+
+        public List<String> GetListOfItemsAdded()
+        {
+            return TableObjects.GetListOfItemsAdded(); 
+        }
+
     }
 }

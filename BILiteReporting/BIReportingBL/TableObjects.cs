@@ -16,6 +16,7 @@ namespace BILiteReporting
 
         private static Dictionary<String, Point> tableObjects = new Dictionary<String, Point>();
         private static Dictionary<Point, Point> tableLocations = new Dictionary<Point, Point>();
+        private static List<String> itemsAddedList = new List<string>();
         public string TableName { get; set; }
         //private static Point TableLocation { get; set; }
         //private static Point AnchorLocation { get; set; }
@@ -25,9 +26,10 @@ namespace BILiteReporting
         private static bool firstTableFlag = true;
 
 
-        public static CheckedListBox CreateTableObject(String tableName)
+        public static MyCheckedListBox CreateTableObject(String tableName)
         {
-            CheckedListBox checkedListBox = new CheckedListBox();
+            MyCheckedListBox checkedListBox = new MyCheckedListBox();
+            itemsAddedList.Clear();
             DataTable table = new DataTable();
             String[] tableReference = tableName.Split('.');
             String serverName = tableReference[0];
@@ -38,6 +40,7 @@ namespace BILiteReporting
             foreach (DataRow dr in table.Rows)
             {
                 checkedListBox.Items.Add(dr["Column_Name"].ToString());
+                itemsAddedList.Add(dr["Column_Name"].ToString());
             }
 
             if (tableXLocation > 400)
@@ -69,11 +72,12 @@ namespace BILiteReporting
                 Point tempPoint = new Point(tableXLocation, tableYLocation);
                 StoreTableOject(actualTableName, tempPoint);
             }
+            
 
             firstTableFlag = false;
             return checkedListBox;
         }
-
+       
         public static String GetActualTableName(String tableName)
         {
             String[] tableReference = tableName.Split('.');
@@ -96,9 +100,21 @@ namespace BILiteReporting
         {
             DataTable table = new DataTable();
             String[] tableReference = tableColumnName.Split('.');
+            int countTableColumnName = tableReference.Count();
             String serverName = tableReference[0];
             String actualTableName = tableReference[2];
-            String actualColumnName = tableReference[3];
+            String actualColumnName;
+            if(countTableColumnName == 4)
+            {
+                 actualColumnName = tableReference[3];
+            }
+            else if(countTableColumnName == 5){
+                actualColumnName = tableReference[3] + '.' + tableReference[4];
+            }
+            else
+            {
+                return "";
+            }
             table = Connection.PopulateTable(@"Use " + serverName + @" Select Data_Type 
                                                From Information_Schema.Columns Where Table_Name =" + "'" +
                                                actualTableName + "'" + "and Column_Name = "+ "'" + actualColumnName + "'"
@@ -111,6 +127,11 @@ namespace BILiteReporting
             }
 
             return result;
+        }
+
+        public static List<String> GetListOfItemsAdded()
+        {
+            return itemsAddedList;
         }
     }
 }

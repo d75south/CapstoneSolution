@@ -45,7 +45,9 @@ namespace BILiteDataLayer
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand command = new SqlCommand(commandString, con);
             SqlDataAdapter sqda = new SqlDataAdapter(command);
+            con.Open();
             sqda.Fill(dt);
+            con.Close();
             return dt;
         }
 
