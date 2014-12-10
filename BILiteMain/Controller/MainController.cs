@@ -152,5 +152,10 @@ namespace BILiteMain
             return TableObjects.GetListOfItemsAdded(); 
         }
 
+        public void AddPKeysToDataTableForTableAdded(String checkBoxName)
+        {
+            TableObjects.AddPKeysToDataTableForTableAdded(checkBoxName);
+        }
+
     }
 }

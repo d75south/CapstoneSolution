@@ -13,6 +13,7 @@ namespace BILiteDataLayer
         public static StringBuilder exceptionString = new StringBuilder();
         
         public Connection(){}
+        public static String MasterDBConnectionString { get { return "Server=localhost;Trusted_Connection = True;"; } }
 
         public static String SystemDBConnectionString { get { return "Server=localhost;Database=TestData;Trusted_Connection=True;"; } }
         

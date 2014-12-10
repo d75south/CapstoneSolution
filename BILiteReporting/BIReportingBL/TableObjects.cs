@@ -24,6 +24,7 @@ namespace BILiteReporting
         private static int tableYLocation = 0;
         private static int tableNameAddition = 0;
         private static bool firstTableFlag = true;
+        private static DataTable PrimaryKeys = new DataTable("Primary Keys");
 
 
         public static MyCheckedListBox CreateTableObject(String tableName)
@@ -73,6 +74,13 @@ namespace BILiteReporting
                 StoreTableOject(actualTableName, tempPoint);
             }
             
+            DataColumn TableName = new DataColumn("TableName");
+            TableName.DataType = System.Type.GetType("System.String");
+            PrimaryKeys.Columns.Add(TableName);
+
+            DataColumn ColumnName = new DataColumn("ColumnName");
+            ColumnName.DataType = System.Type.GetType("System.String");
+            PrimaryKeys.Columns.Add(ColumnName);
 
             firstTableFlag = false;
             return checkedListBox;
@@ -96,10 +104,10 @@ namespace BILiteReporting
         }
 
         /*Using the column data type determine whether you can aggregate the column or not*/
-        public static String GetColumnDataType(String tableColumnName)
+        public static String GetColumnDataType(String checkBoxName)
         {
             DataTable table = new DataTable();
-            String[] tableReference = tableColumnName.Split('.');
+            String[] tableReference = checkBoxName.Split('.');
             int countTableColumnName = tableReference.Count();
             String serverName = tableReference[0];
             String actualTableName = tableReference[2];
@@ -132,6 +140,29 @@ namespace BILiteReporting
         public static List<String> GetListOfItemsAdded()
         {
             return itemsAddedList;
+        }
+
+
+        public static void AddPKeysToDataTableForTableAdded(String checkBoxName)
+        {
+            //break up checkBoxName into its constituent parts
+            String[] tempArray = checkBoxName.Split('.');
+
+            String databaseName = tempArray[0];
+            String schemaName = tempArray[1];
+            String tableName = tempArray[2];
+
+           String sqlString = "USE " + databaseName + " EXEC sp_pkeys @table_Name=" + "'" + tableName + "'" + ", @table_owner=" + "'" + schemaName + "'";
+           DataTable dt = new DataTable();
+           dt =  Connection.PopulateTable(sqlString, Connection.MasterDBConnectionString);
+            foreach(DataRow dr in dt.Rows)
+            {
+                DataRow newDr = PrimaryKeys.NewRow();
+                newDr["TableName"] = dr["TABLE_NAME"];
+                newDr["ColumnName"] = dr["COLUMN_NAME"];
+                
+            }
+ 
         }
     }
 }

@@ -313,6 +313,8 @@ namespace BILiteMain
             //              select myRow["Table1Name"];
             //String table1Name = results.Single().ToString();
 
+            controller.AddPKeysToDataTableForTableAdded(chListbox.Name);
+
             SelectedNode = null;
 
             panel5.Visible = true;
@@ -384,11 +386,15 @@ namespace BILiteMain
                     panel4.Controls.Remove(chlb);
                     break;
                 case "Inner Join":
-                    currentLine = new Line(Pens.Black, new Point(150,150), new Point(140, 140));
-                    lineList.Add(currentLine);
-                    this.Invalidate();
-                    panel4.Refresh();
+                    //currentLine = new Line(Pens.Black, new Point(150,150), new Point(140, 140));
+                    //lineList.Add(currentLine);
+                    //this.Invalidate();
+                    //panel4.Refresh();
                     // TODO: update joins table to reflect inner join - use joinID as unique ID for row
+                    //chlb.Name gets the name of the checkbox that generated the contextmenu
+                    MessageBox.Show(chlb.Name);
+
+
                     break;
                 case "Right Join":
                     //ctrl_MouseDown(ctrl, e, dr);
@@ -483,7 +489,14 @@ namespace BILiteMain
                 object item = chbx.SelectedItem;
                 var itemS = chbx.IndexFromPoint(e.Location);
                 chbx.SelectedIndex = itemS;
-                SelectedItemName = chbx.SelectedItem.ToString();
+                if (chbx.SelectedIndex != -1)
+                {
+                    SelectedItemName = chbx.SelectedItem.ToString();
+                }
+                else
+                {
+                    SelectedItemName = null;
+                }
                 if (SelectedItemName != null || SelectedItemName != "")
                 {
                     FullyQualTableFieldName = chbx.Name + '.' + SelectedItemName;

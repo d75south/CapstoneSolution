@@ -46,3 +46,13 @@ X:\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.Properties.Resourc
 X:\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.csproj.GenerateResource.Cache
 X:\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.exe
 X:\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.csprojResolveAssemblyReference.cache
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.Properties.Resources.resources
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.csproj.GenerateResource.Cache
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.exe
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\bin\Debug\BILiteReporting.exe.config
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\bin\Debug\BILiteReporting.exe
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\bin\Debug\BILiteReporting.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\bin\Debug\BILiteDataLayer.dll
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\bin\Debug\BILiteDataLayer.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteReporting\obj\Debug\BILiteReporting.pdb

@@ -23,3 +23,9 @@ X:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.dll
 X:\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.pdb
 X:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
 X:\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.dll
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDataLayer\bin\Debug\BILiteDataLayer.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDataLayer\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.csprojResolveAssemblyReference.cache
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.dll
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDataLayer\obj\Debug\BILiteDataLayer.pdb
