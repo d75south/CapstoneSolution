@@ -147,15 +147,31 @@ namespace BILiteMain
             return TableObjects.GetColumnDataType(tableName);
         }
 
-        public List<String> GetListOfItemsAdded()
-        {
-            return TableObjects.GetListOfItemsAdded(); 
-        }
 
         public void AddPKeysToDataTableForTableAdded(String checkBoxName)
         {
             TableObjects.AddPKeysToDataTableForTableAdded(checkBoxName);
         }
 
+        public void AddFKeysToDataTableForTableAdded(String checkBoxName)
+        {
+            TableObjects.AddFKeysToDataTableForTableAdded(checkBoxName);
+        }
+
+        public List<String> GetPrimaryKeysForTable(String checkBoxName)
+        {
+            return TableObjects.GetPrimaryKeysForTable(checkBoxName);
+        }
+
+        public List<String> GetForeignKeysForTable(String checkBoxName)
+        {
+            return TableObjects.GetForeignKeysForTable(checkBoxName);
+        }
+
+
+        public DataTable GetTableItemsTable()
+        {
+            return TableObjects.GetTableItemsTable();
+        }
     }
 }

@@ -16,7 +16,6 @@ namespace BILiteReporting
 
         private static Dictionary<String, Point> tableObjects = new Dictionary<String, Point>();
         private static Dictionary<Point, Point> tableLocations = new Dictionary<Point, Point>();
-        private static List<String> itemsAddedList = new List<string>();
         public string TableName { get; set; }
         //private static Point TableLocation { get; set; }
         //private static Point AnchorLocation { get; set; }
@@ -24,24 +23,26 @@ namespace BILiteReporting
         private static int tableYLocation = 0;
         private static int tableNameAddition = 0;
         private static bool firstTableFlag = true;
+        private static int KeysInitiatedFlag = 0;
         private static DataTable PrimaryKeys = new DataTable("Primary Keys");
+        private static DataTable ForeignKeys = new DataTable("Foreign Keys");
+        private static DataTable TableItemsTable = new DataTable();
 
 
         public static MyCheckedListBox CreateTableObject(String tableName)
         {
             MyCheckedListBox checkedListBox = new MyCheckedListBox();
-            itemsAddedList.Clear();
-            DataTable table = new DataTable();
+            TableItemsTable.Clear();
             String[] tableReference = tableName.Split('.');
             String serverName = tableReference[0];
             String actualTableName = tableReference[2];
-            table = Connection.PopulateTable(@"Use " + serverName + @" Select Column_Name 
+            TableItemsTable = Connection.PopulateTable(@"Use " + serverName + @" Select Table_Name, Column_Name, Data_Type 
                                                From Information_Schema.Columns Where Table_Name =" + "'" + 
                                                actualTableName + "'", @"Server=localhost;Trusted_Connection=True;");
-            foreach (DataRow dr in table.Rows)
+            foreach (DataRow dr in TableItemsTable.Rows)
             {
                 checkedListBox.Items.Add(dr["Column_Name"].ToString());
-                itemsAddedList.Add(dr["Column_Name"].ToString());
+
             }
 
             if (tableXLocation > 400)
@@ -73,15 +74,26 @@ namespace BILiteReporting
                 Point tempPoint = new Point(tableXLocation, tableYLocation);
                 StoreTableOject(actualTableName, tempPoint);
             }
-            
-            DataColumn TableName = new DataColumn("TableName");
-            TableName.DataType = System.Type.GetType("System.String");
-            PrimaryKeys.Columns.Add(TableName);
 
-            DataColumn ColumnName = new DataColumn("ColumnName");
-            ColumnName.DataType = System.Type.GetType("System.String");
-            PrimaryKeys.Columns.Add(ColumnName);
+            if (KeysInitiatedFlag == 0)
+            {
+                DataColumn TableName = new DataColumn("TableName");
+                TableName.DataType = System.Type.GetType("System.String");
+                PrimaryKeys.Columns.Add(TableName);
 
+                DataColumn ColumnName = new DataColumn("ColumnName");
+                ColumnName.DataType = System.Type.GetType("System.String");
+                PrimaryKeys.Columns.Add(ColumnName);
+
+                DataColumn FKTableName = new DataColumn("TableName");
+                FKTableName.DataType = System.Type.GetType("System.String");
+                ForeignKeys.Columns.Add(FKTableName);
+
+                DataColumn FKColumnName = new DataColumn("ColumnName");
+                FKColumnName.DataType = System.Type.GetType("System.String");
+                ForeignKeys.Columns.Add(FKColumnName);
+            }
+            KeysInitiatedFlag = 1;
             firstTableFlag = false;
             return checkedListBox;
         }
@@ -137,10 +149,6 @@ namespace BILiteReporting
             return result;
         }
 
-        public static List<String> GetListOfItemsAdded()
-        {
-            return itemsAddedList;
-        }
 
 
         public static void AddPKeysToDataTableForTableAdded(String checkBoxName)
@@ -160,9 +168,79 @@ namespace BILiteReporting
                 DataRow newDr = PrimaryKeys.NewRow();
                 newDr["TableName"] = dr["TABLE_NAME"];
                 newDr["ColumnName"] = dr["COLUMN_NAME"];
-                
+
+                PrimaryKeys.Rows.Add(newDr);
             }
- 
+        }
+
+        public static void AddFKeysToDataTableForTableAdded(String checkBoxName)
+        {
+            //break up checkBoxName into its constituent parts
+            String[] tempArray = checkBoxName.Split('.');
+
+            String databaseName = tempArray[0];
+            String schemaName = tempArray[1];
+            String tableName = tempArray[2];
+
+            String sqlString = "USE " + databaseName + " EXEC sp_fkeys @fktable_Name=" + "'" + tableName + "'" + ", @fktable_owner=" + "'" + schemaName + "'";
+            DataTable dt = new DataTable();
+            dt = Connection.PopulateTable(sqlString, Connection.MasterDBConnectionString);
+            foreach (DataRow dr in dt.Rows)
+            {
+                DataRow newFKDr = ForeignKeys.NewRow();
+                newFKDr["TableName"] = dr["FKTABLE_NAME"];
+                newFKDr["ColumnName"] = dr["FKCOLUMN_NAME"];
+
+                ForeignKeys.Rows.Add(newFKDr);
+            }
+        }
+
+        public static List<String> GetPrimaryKeysForTable(String checkBoxName)
+        {
+            List<String> primaryKeysList = new List<string>();
+
+            String[] tempArray = checkBoxName.Split('.');
+
+            String databaseName = tempArray[0];
+            String schemaName = tempArray[1];
+            String tableName = tempArray[2];
+
+            //All you need here is the table name - don't get confused
+            foreach(DataRow dr in PrimaryKeys.Rows)
+            {
+                if(dr["TableName"].ToString() == tableName)
+                {
+                    primaryKeysList.Add(dr["ColumnName"].ToString());
+                }
+            }
+
+            return primaryKeysList;
+        }
+
+        public static List<String> GetForeignKeysForTable(String checkBoxName)
+        {
+            List<String> foreignKeysList = new List<string>();
+
+            String[] tempArray = checkBoxName.Split('.');
+
+            String databaseName = tempArray[0];
+            String schemaName = tempArray[1];
+            String tableName = tempArray[2];
+
+            foreach (DataRow dr in ForeignKeys.Rows)
+            {
+                if (dr["TableName"].ToString() == tableName)
+                {
+                    foreignKeysList.Add(dr["ColumnName"].ToString());
+                }
+            }
+
+            return foreignKeysList;
+        }
+
+        public static DataTable GetTableItemsTable()
+        {
+            return TableItemsTable;
         }
     }
 }

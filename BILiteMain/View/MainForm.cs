@@ -22,17 +22,12 @@ namespace BILiteMain
         private bool IsInList { get; set; }
         private bool IsSelectedNodeParentParentNode { get; set; }
         private String TableReference { get; set; }
-        private Boolean dragInProgress = false;
-        int MouseDownX = 0;
-        int MouseDownY = 0;
         Control activeControl;
         private MyCheckedListBox chlb;
         private StringBuilder selectBuilder = new StringBuilder();
         private StringBuilder fromBuilder = new StringBuilder();
         List<Line> lineList = new List<Line>();
-        Line currentLine;
         Line ActiveLine;
-        private ContextMenuStrip checkedListItem;
         private String SelectedItemName;
         private String CheckedListBoxForDetermination;
         private String FullyQualTableFieldName;
@@ -43,6 +38,18 @@ namespace BILiteMain
         DataTable dataGridView1Table = new DataTable();
         private List<String> tableList = new List<String>();
         public static StringBuilder selectForBuild = new StringBuilder();
+        private string baseTableReference;
+
+        private string table1ManJoinTableName;
+        private string table2ManJoinTableName;
+        private string table1ManJoinColumnName;
+        private string table2ManJoinColumnName;
+        private string table1ManJoinDataType;
+        private string table2ManJoinDataType;
+        private string t1ManJoinSelectedItem;
+        private string t2ManJoinSelectedItem;
+        private int JoiningFlag = 0;
+        private String table1ManJoinType;
         
         public MainForm()
         {
@@ -61,7 +68,7 @@ namespace BILiteMain
             label2.MouseDown += label_MouseDown;
             label4.MouseDown += label_MouseDown;
 
-            //panel5.Resize += panel5_Resize;
+            //*****************************************JoinsTable*******************************\\
 
             DataColumn ID = new DataColumn("ID");
             ID.DataType = System.Type.GetType("System.Int32");
@@ -111,18 +118,31 @@ namespace BILiteMain
             LineEnd.DataType = System.Type.GetType("System.String");
             JoinsTable.Columns.Add(LineEnd);
 
-            DataColumn TableName = new DataColumn("TableName");
-            TableName.DataType = System.Type.GetType("System.String");
-            tableItems.Columns.Add(TableName);
+            //*******************************tableItems*************************************\\
 
-            DataColumn Items = new DataColumn("Items");
-            Items.DataType = System.Type.GetType("System.String");
-            tableItems.Columns.Add(Items);
+            DataColumn Table_Name = new DataColumn("Table_Name");
+            Table_Name.DataType = System.Type.GetType("System.String");
+            tableItems.Columns.Add(Table_Name);
 
+            DataColumn Column_Name = new DataColumn("Column_Name");
+            Column_Name.DataType = System.Type.GetType("System.String");
+            tableItems.Columns.Add(Column_Name);
+
+            DataColumn Data_Type = new DataColumn("Data_Type");
+            Data_Type.DataType = System.Type.GetType("System.String");
+            tableItems.Columns.Add(Data_Type);
+
+            //*****************************dataGridView1Table******************************\\
            
             DataColumn tableName = new DataColumn("TableName");
             tableName.DataType = System.Type.GetType("System.String");
             dataGridView1Table.Columns.Add(tableName);
+
+            DataColumn ColumnName = new DataColumn("ColumnName");
+            ColumnName.DataType = System.Type.GetType("System.String");
+            dataGridView1Table.Columns.Add(ColumnName);
+
+
         }
 
         Point deltaStart;
@@ -263,61 +283,190 @@ namespace BILiteMain
 
             if (SelectedNode != null)
             {
-                
-                DataRow JoinsNewRow1 = JoinsTable.NewRow();
-                JoinsNewRow1["ID"] = JoinID;
-                JoinsNewRow1["Table1Name"] = TableReference;
 
-                List<String> itemsAddedList = new List<string>();
-                itemsAddedList = controller.GetListOfItemsAdded();
-
-                foreach (String item in itemsAddedList)
+                foreach (DataRow dr in controller.GetTableItemsTable().Rows)
                 {
                     DataRow ItemsNewRow1 = tableItems.NewRow();
-                    ItemsNewRow1["TableName"] = TableReference;
-                    ItemsNewRow1["Items"] = TableReference;
+                    ItemsNewRow1["Table_Name"] = TableReference;
+                    ItemsNewRow1["Data_Type"] = dr["Data_Type"].ToString();
+                    ItemsNewRow1["Column_Name"] = dr["Column_Name"].ToString();
+                    tableItems.Rows.Add(ItemsNewRow1);
                 }
-
-                if (JoinsTable.Rows.Count > 0)
-                {
-                    foreach (Control ctrl in panel4.Controls)
-                    {
-                        //if (ctrl is MyCheckedListBox)
-                        //{
-                        //    MyCheckedListBox chlstbx = (MyCheckedListBox) ctrl;
-                        //    //List<String> itemsAddedList = new List<string>();
-                        //    itemsAddedList = controller.GetListOfItemsAdded();
-                        //    foreach(String item in itemsAddedList)
-                        //    {
-                        //        MessageBox.Show(item);
-                        //    }
-                        //}
-                        
-                    }
-                }
-                JoinsTable.Rows.Add(JoinsNewRow1);
-                JoinID += 1;
-                panel4.Controls.Add(chListbox);
-
-                int? length = TableReference.Length;
-                tableList.Add(TableReference);
-                if (tableList.Count > 1)
-                {
-                    fromBuilder.Append(" Cross Join" + Environment.NewLine);
-                }
-                fromBuilder.Append(TableReference);
             }
 
-            //var results = from myRow in JoinsTable.AsEnumerable()
-            //              where myRow.Field<int?>("ID") == 0
-            //              select myRow["Table1Name"];
-            //String table1Name = results.Single().ToString();
+            
 
             controller.AddPKeysToDataTableForTableAdded(chListbox.Name);
+            controller.AddFKeysToDataTableForTableAdded(chListbox.Name);
+
+            List<String> t2Keys = new List<String>();
+            t2Keys = CreateCombinedKeysList(controller.GetPrimaryKeysForTable(chListbox.Name), controller.GetForeignKeysForTable(chListbox.Name));
+
+            int counter = 0;
+            foreach (Control mclb in panel4.Controls)
+            {
+                if (mclb is MyCheckedListBox)
+                {
+                    counter++;
+                }
+            }
+
+            bool returnOrNot = false;
+            if (counter > 0)
+            {
+                foreach (Control mclb in panel4.Controls)
+                {
+                    if (mclb is MyCheckedListBox)
+                    {
+                            List<String> t1Keys = new List<String>();
+                            t1Keys = CreateCombinedKeysList(controller.GetPrimaryKeysForTable(mclb.Name), controller.GetForeignKeysForTable(mclb.Name));
+                            returnOrNot = UpdateJoinsTableForDefaultJoin(t1Keys, t2Keys, chListbox.Name, mclb.Name);
+                            if (returnOrNot) { break; }
+                    }
+                }
+                if (!returnOrNot) { MessageBox.Show("This table does not contain a common key with other tables currently available"); }
+            }
+
+            tableList.Add(TableReference);
+
+            PerformJoin();
+
+            panel4.Controls.Add(chListbox);
 
             SelectedNode = null;
 
             panel5.Visible = true;
+        }
+
+        private void PerformJoin()
+        {
+            fromBuilder.Clear();
+            if (tableList.Count > 1)
+            {
+                if (JoinsTable.Rows.Count == 1 && baseTableReference == "")
+                {
+                    foreach(DataRow dr in JoinsTable.Rows)
+                    {
+                        baseTableReference = dr["Table1Name"].ToString();
+                    }
+                }
+                fromBuilder.Append(baseTableReference);
+                foreach (DataRow dr in JoinsTable.Rows)
+                {
+                    fromBuilder.Append(" " + dr["JoinType"].ToString() + Environment.NewLine + dr["Table2Name"].ToString() +
+                        " on " + dr["Table1Name"].ToString() + "." + dr["Table1ColName"].ToString() + " = " +
+                        dr["Table2Name"].ToString() + "." + dr["Table2ColName"].ToString());
+                }
+            }
+            else
+            {
+                baseTableReference = TableReference;
+                fromBuilder.Append(TableReference);
+            }
+
+            textBox1.Text = "Select " + selectBuilder.ToString() + Environment.NewLine +
+             "From " + fromBuilder.ToString() + Environment.NewLine;
+        }
+
+        private bool UpdateJoinsTableForDefaultJoin(List<String> t1keys, List<String> t2keys, String t1Name, String t2Name)
+        {
+            if(t1keys != null && t2keys != null)
+            {
+                foreach (String lItem in t1keys)
+                {
+                    int itemIndex = t2keys.IndexOf(lItem);
+                    if (itemIndex > -1)
+                    {
+                        String Table1ColDataType = controller.GetColumnDataType(t1Name + '.' + lItem);
+                        String Table2ColDataType = controller.GetColumnDataType(t2Name + '.' + t2keys[itemIndex]);
+
+                        if (Table1ColDataType == Table2ColDataType)
+                        {
+                            DataRow newDr = JoinsTable.NewRow();
+                            newDr["ID"] = JoinID += 1;
+                            newDr["Table1Name"] = t2Name;
+                            newDr["Table1ColName"] = t2keys[itemIndex];
+                            newDr["Table2Name"] = t1Name;
+                            newDr["Table2ColName"] = lItem;
+                            newDr["Table1DataType"] = Table2ColDataType;
+                            newDr["Table2DataType"] = Table1ColDataType;
+                            newDr["JoinType"] = "Inner Join";
+                            JoinsTable.Rows.Add(newDr);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void UpdateJoinsTableOnCheckBoxRemove(string checkBoxName)
+        {
+            List<String> toDelete = new List<String>();
+            foreach (DataRow dr in JoinsTable.Rows)
+            {
+                if (dr["Table1Name"].ToString() == checkBoxName || dr["Table2Name"].ToString() == checkBoxName)
+                {
+                    toDelete.Add(dr["ID"].ToString());
+                }
+            }
+
+            foreach (String ID in toDelete)
+            {
+                if (JoinsTable.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in JoinsTable.Rows)
+                    {
+                        if (dr["ID"].ToString() == ID)
+                        {
+                            JoinsTable.Rows.Remove(dr);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
+            }
+            if (baseTableReference == checkBoxName)
+            {
+                baseTableReference = "";
+            }
+            JoinsTable.AcceptChanges();
+            PerformJoin();
+            
+        }
+
+        private void UpdateJoinsTableForManualJoin(String joinType, String table1Name, String table2Name, 
+            String table1ColName, String table2ColName, String table1DataType, String table2DataType)
+        {
+            if (table1DataType == table2DataType)
+            {
+                DataRow newDr = JoinsTable.NewRow();
+                newDr["ID"] = JoinID += 1;
+                newDr["Table1Name"] = table1Name;
+                newDr["Table1ColName"] = table1ColName;
+                newDr["Table2Name"] = table2Name;
+                newDr["Table2ColName"] = table2ColName;
+                newDr["Table1DataType"] = table1DataType;
+                newDr["Table2DataType"] = table2DataType;
+                newDr["JoinType"] = joinType;
+                JoinsTable.Rows.Add(newDr);
+            }
+            else
+            {
+                MessageBox.Show("These two fields are not of the same dataType and cannot be joined");
+            }
+            PerformJoin();
+        }
+
+        private List<String> CreateCombinedKeysList(List<String> pkeys, List<String> fkeys)
+        {
+            var tempList = pkeys.Concat(fkeys);
+            List<String> list = new List<String>();
+            list = tempList.ToList<String>();
+            return list ;
         }
 
         //ScrollEventType mLastScroll = ScrollEventType.EndScroll;
@@ -347,6 +496,7 @@ namespace BILiteMain
   
         }
 
+
        private void toolStripItem_Click(object sender, MouseEventArgs e)
         {
             ToolStripMenuItem toolStripItem = new ToolStripMenuItem();
@@ -374,6 +524,7 @@ namespace BILiteMain
                         }
 
                         String selectString = selectBuilder.ToString();
+                        String fromString = fromBuilder.ToString();
                         if (selectString.Contains(valueToRemove.Trim()))
                         {
                             selectString = selectString.Replace(valueToRemove, "");
@@ -381,28 +532,30 @@ namespace BILiteMain
                             selectBuilder.Append(selectString);
                         }
                     }
-                    textBox1.Text = "Select " + selectBuilder.ToString() + Environment.NewLine +
-                                    "From" + Environment.NewLine + "Where";
+                    MessageBox.Show(chlb.Name);
+                    UpdateJoinsTableOnCheckBoxRemove(chlb.Name);
                     panel4.Controls.Remove(chlb);
+
+                    if (fromBuilder.Length == 0)
+                    {
+                        foreach (Control ctrl in panel4.Controls)
+                        {
+                            if (ctrl is MyCheckedListBox)
+                            {
+                                panel4.Controls.Remove(ctrl);
+                                panel4.Invalidate();
+                            }
+                        }
+                    }
                     break;
                 case "Inner Join":
-                    //currentLine = new Line(Pens.Black, new Point(150,150), new Point(140, 140));
-                    //lineList.Add(currentLine);
-                    //this.Invalidate();
-                    //panel4.Refresh();
-                    // TODO: update joins table to reflect inner join - use joinID as unique ID for row
-                    //chlb.Name gets the name of the checkbox that generated the contextmenu
-                    MessageBox.Show(chlb.Name);
-
-
+                    table1ManJoinType = "Inner Join";
                     break;
                 case "Right Join":
-                    //ctrl_MouseDown(ctrl, e, dr);
-                    // TODO: update joins table to reflect right join - use joinID as unique ID for row
+                    table1ManJoinType = "Right Join";
                     break;
                 case "Left Join":
-                    //ctrl_MouseDown(ctrl, e, dr);
-                    //TODO: update joins table to reflect left join - use joinID as unique ID for row
+                    table1ManJoinType = "Left Join";
                     break;
             } 
         }
@@ -481,14 +634,16 @@ namespace BILiteMain
             ColumnDataType = null;
             this.activeControl = sender as Control;
 
+            MyCheckedListBox chbx = (MyCheckedListBox)activeControl;
+            chlb = chbx;;
+            object item = chbx.SelectedItem;
+            var itemS = chbx.IndexFromPoint(e.Location);
+            chbx.SelectedIndex = itemS;
+
             if (e.Button == MouseButtons.Right)
             {
-                MyCheckedListBox chbx = (MyCheckedListBox)activeControl;
-                chlb = chbx;
-                CheckedListBoxForDetermination = chbx.Name;
-                object item = chbx.SelectedItem;
-                var itemS = chbx.IndexFromPoint(e.Location);
-                chbx.SelectedIndex = itemS;
+                JoiningFlag = 1;
+
                 if (chbx.SelectedIndex != -1)
                 {
                     SelectedItemName = chbx.SelectedItem.ToString();
@@ -500,11 +655,35 @@ namespace BILiteMain
                 if (SelectedItemName != null || SelectedItemName != "")
                 {
                     FullyQualTableFieldName = chbx.Name + '.' + SelectedItemName;
-                    //returns the datatype for the column selected from the table object and stores in a class level
-                    //variable
-                    ColumnDataType = controller.GetColumnDataType(FullyQualTableFieldName);
-                // TODO update joins table to reflect data type for clumn - use joinID to identify row to update
+                    table1ManJoinTableName = chbx.Name;
+                    table1ManJoinColumnName = SelectedItemName;
+                    table1ManJoinDataType = controller.GetColumnDataType(FullyQualTableFieldName);
                 }
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (JoiningFlag == 1)
+                {
+                    if (chbx.SelectedIndex != -1)
+                    {
+                        SelectedItemName = chbx.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        SelectedItemName = null;
+                    }
+                    if (SelectedItemName != null || SelectedItemName != "")
+                    {
+                        FullyQualTableFieldName = chbx.Name + '.' + SelectedItemName;
+                        table2ManJoinTableName = chbx.Name;
+                        table2ManJoinColumnName = SelectedItemName;
+                        table2ManJoinDataType = controller.GetColumnDataType(FullyQualTableFieldName);
+                    }
+                    UpdateJoinsTableForManualJoin(table1ManJoinType, table1ManJoinTableName, table2ManJoinTableName,
+                        table1ManJoinColumnName, table2ManJoinColumnName, table1ManJoinDataType, table2ManJoinDataType);
+                }
+                JoiningFlag = 0;
             }
         }
 
@@ -512,15 +691,6 @@ namespace BILiteMain
         public void ctrl_MouseUp(object sender, MouseEventArgs e)
         {
 
-            if (e.Button == MouseButtons.Left)
-            {
-                this.dragInProgress = false;
-                MouseDownX = 0;
-                MouseDownY = 0;
-                this.activeControl = null;
-            }
-
-            return;
         }
 
         private void createNewToolStripMenuItem1_Click_1(object sender, EventArgs e)

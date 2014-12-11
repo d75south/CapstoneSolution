@@ -35,3 +35,10 @@ X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.Properties.Resourc
 X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
 X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
 X:\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe.config
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.exe
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\bin\Debug\BILiteDashboard.pdb
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.Properties.Resources.resources
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.csproj.GenerateResource.Cache
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.exe
+C:\Users\dereksouthard\Documents\Visual Studio 2012\CapstoneSolution\BILiteDashboard\obj\Debug\BILiteDashboard.pdb
